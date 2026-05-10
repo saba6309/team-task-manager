@@ -146,3 +146,14 @@ def delete_task(request, task_id):
     task.delete()
 
     return redirect('dashboard')
+
+from django.shortcuts import redirect, get_object_or_404
+from .models import Task
+
+def update_status(request, task_id, status):
+    task = get_object_or_404(Task, id=task_id)
+
+    task.status = status
+    task.save()
+
+    return redirect('dashboard')
