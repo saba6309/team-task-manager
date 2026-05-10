@@ -16,8 +16,8 @@ def signup_view(request):
             user = form.save()
             user.set_password(form.cleaned_data['password'])
             user.save()
-
-            Profile.objects.create(user=user, role='Member')
+            role = request.POST.get('role')
+            Profile.objects.create(user=user, role=role)
 
             return redirect('login')
 
