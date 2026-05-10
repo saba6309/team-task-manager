@@ -132,6 +132,13 @@ MIDDLEWARE.insert(
 #    'whitenoise.storage.CompressedStaticFilesStorage'
 #)
 
-DATABASES['default'] = dj_database_url.config(
-    default='sqlite:///db.sqlite3'
-)
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
+    }
+}
