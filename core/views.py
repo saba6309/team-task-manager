@@ -89,9 +89,9 @@ def dashboard(request):
 @login_required
 def create_project(request):
 
-    profile, created = Profile.objects.get_or_create(user=request.user)
+    profile = Profile.objects.get(user=request.user)
 
-    if profile.role != 'Admin':
+    if profile.role != 'admin':
         return HttpResponse("Only Admin can create projects")
 
     if request.method == 'POST':
@@ -112,10 +112,10 @@ def create_project(request):
 @login_required
 def create_task(request):
 
-    profile, created = Profile.objects.get_or_create(user=request.user)
+    profile = Profile.objects.get(user=request.user)
 
-    if profile.role != 'Admin':
-        return HttpResponse("Only Admin can create tasks")
+    if profile.role != 'admin':
+        return HttpResponse("Only Admin can create projects")
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
