@@ -86,6 +86,7 @@ DATABASES = {
 }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -132,3 +133,7 @@ MIDDLEWARE.insert(
 #STATICFILES_STORAGE = (
 #    'whitenoise.storage.CompressedStaticFilesStorage'
 #)
+
+DATABASES['default'] = dj_database_url.config(
+    default='sqlite:///db.sqlite3'
+)
