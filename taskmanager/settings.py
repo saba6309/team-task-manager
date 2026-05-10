@@ -129,7 +129,7 @@ MIDDLEWARE.insert(
 )
 
 STATICFILES_STORAGE = (
-    'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    'whitenoise.storage.CompressedStaticFilesStorage'
 )
 
 DATABASES['default'] = dj_database_url.config(
