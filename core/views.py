@@ -89,7 +89,7 @@ def dashboard(request):
 @login_required
 def create_project(request):
 
-    profile = Profile.objects.get(user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
 
     if profile.role != 'Admin':
         return HttpResponse("Only Admin can create projects")
@@ -112,7 +112,7 @@ def create_project(request):
 @login_required
 def create_task(request):
 
-    profile = Profile.objects.get(user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
 
     if profile.role != 'Admin':
         return HttpResponse("Only Admin can create tasks")
@@ -136,7 +136,7 @@ def logout_view(request):
 @login_required
 def delete_task(request, task_id):
 
-    profile = Profile.objects.get(user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
 
     if profile.role != 'Admin':
         return HttpResponse("Only Admin can delete tasks")
@@ -144,16 +144,5 @@ def delete_task(request, task_id):
     task = Task.objects.get(id=task_id)
 
     task.delete()
-
-    return redirect('dashboard')
-
-@login_required
-def update_status(request, task_id, status):
-
-    task = Task.objects.get(id=task_id)
-
-    task.status = status
-
-    task.save()
 
     return redirect('dashboard')
